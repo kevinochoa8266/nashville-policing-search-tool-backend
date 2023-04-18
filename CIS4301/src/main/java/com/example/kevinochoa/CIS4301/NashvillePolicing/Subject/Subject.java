@@ -1,4 +1,4 @@
-package com.example.kevinochoa.CIS4301.Police;
+package com.example.kevinochoa.CIS4301.NashvillePolicing.Subject;
 
 import jakarta.persistence.*;
 
