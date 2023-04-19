@@ -63,11 +63,10 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Subject{" +
-                "stopId=" + stopId +
+        return  "stopId=" + stopId +
                 ", race='" + race + '\'' +
                 ", age=" + age +
                 ", sex='" + sex + '\'' +
-                '}';
+                ',';
     }
 }
