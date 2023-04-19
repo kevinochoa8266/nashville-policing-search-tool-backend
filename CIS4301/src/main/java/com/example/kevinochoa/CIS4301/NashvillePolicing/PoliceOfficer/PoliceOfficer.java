@@ -58,8 +58,7 @@ public class PoliceOfficer {
 
     @Override
     public String toString() {
-        return "PoliceOfficer{" +
-                "officerId='" + officerId + '\'' +
+        return  "officerId='" + officerId + '\'' +
                 ", precinctId=" + precinctId +
                 ", reportingArea=" + reportingArea +
                 ", zoneCode=" + zoneCode +

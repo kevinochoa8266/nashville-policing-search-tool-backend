@@ -2,7 +2,6 @@ package com.example.kevinochoa.CIS4301.NashvillePolicing.Outcome;
 
 import com.example.kevinochoa.CIS4301.Dao.DAO;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.Subject.Subject;
-import com.example.kevinochoa.CIS4301.NashvillePolicing.Subject.SubjectJdbcDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;

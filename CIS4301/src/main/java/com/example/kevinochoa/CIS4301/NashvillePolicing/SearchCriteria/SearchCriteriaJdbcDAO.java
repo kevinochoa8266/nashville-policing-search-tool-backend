@@ -2,7 +2,8 @@ package com.example.kevinochoa.CIS4301.NashvillePolicing.SearchCriteria;
 
 import com.example.kevinochoa.CIS4301.Dao.DAO;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.Outcome.Outcome;
-import com.example.kevinochoa.CIS4301.NashvillePolicing.Outcome.OutcomeJdbcDAO;
+import com.example.kevinochoa.CIS4301.NashvillePolicing.PoliceOfficer.PoliceOfficer;
+import com.example.kevinochoa.CIS4301.NashvillePolicing.Setting.Setting;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.Subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,19 +21,28 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
     private JdbcTemplate jdbcTemplate;
 
     RowMapper<SearchCriteria> rowMapper = (rs, rowNum) -> {
+        Setting setting = new Setting();
+        setting.setStopDate(rs.getDate("stopDate"));
+        setting.setStopTime(rs.getTime("stopTime"));
+        setting.setAddress(rs.getString("address"));
+        PoliceOfficer policeOfficer = new PoliceOfficer();
+        policeOfficer.setOfficerId(rs.getString("officerid"));
+        policeOfficer.setPrecinctId(rs.getInt("precinctid"));
+        policeOfficer.setReportingArea(rs.getInt("reportingArea"));
+        policeOfficer.setZoneCode(rs.getInt("zoneCode"));
         Subject subject = new Subject();
-        subject.setStopId(rs.getLong("stopid"));
         subject.setRace(rs.getString("race"));
         subject.setAge(rs.getInt("age"));
         subject.setSex(rs.getString("sex"));
-        Outcome outcome = new Outcome();
-        outcome.setStopId(rs.getLong("stopid"));
-        outcome.setArrest(rs.getBoolean("arrest"));
-        outcome.setCitation(rs.getBoolean("citation"));
-        outcome.setWarningIssued(rs.getBoolean("warningIssued"));
+//        Outcome outcome = new Outcome();
+//        outcome.setStopId(rs.getLong("stopid"));
+//        outcome.setArrest(rs.getBoolean("arrest"));
+//        outcome.setCitation(rs.getBoolean("citation"));
+//        outcome.setWarningIssued(rs.getBoolean("warningIssued"));
         SearchCriteria searchCriteria = new SearchCriteria();
         searchCriteria.setSubject(subject);
-        searchCriteria.setOutcome(outcome);
+        searchCriteria.setSetting(setting);
+        searchCriteria.setPoliceOfficer(policeOfficer);
         return searchCriteria;
     };
 
@@ -42,7 +52,8 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
 
     @Override
     public List<SearchCriteria> list() {
-        String sql = "SELECT s.*, o.* FROM subject s JOIN Outcome o ON s.stopid = o.stopid";
+        String sql = "SELECT se.*, p.*, s.* FROM setting se, policeOfficer p, subject s" +
+                     " WHERE s.stopid = o.stopid AND s.stopid = se.stopid AND s.age = 40";
         jdbcTemplate.setFetchSize(15000);
         return jdbcTemplate.query(sql, rowMapper);
     }
