@@ -21,7 +21,7 @@ public class Cis4301Application{
 		SpringApplication.run(Cis4301Application.class, args);
 
 		List<Subject> subjects = dao.list();
-		subjects.forEach(System.out::println);
+		System.out.println(subjects.size());
 	}
 
 }

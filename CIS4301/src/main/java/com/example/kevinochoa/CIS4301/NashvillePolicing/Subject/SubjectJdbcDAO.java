@@ -31,7 +31,8 @@ public class SubjectJdbcDAO implements DAO<Subject> {
 
     @Override
     public List<Subject> list() {
-        String sql = "SELECT * FROM subject FETCH FIRST 3 ROWS ONLY";
+        String sql = "SELECT * FROM subject";
+        jdbcTemplate.setFetchSize(15000);
         return jdbcTemplate.query(sql, rowMapper);
     }
 
