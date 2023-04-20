@@ -1,13 +1,9 @@
 package com.example.kevinochoa.CIS4301.NashvillePolicing.Subject;
 
-import jakarta.persistence.*;
+import org.springframework.jdbc.core.RowMapper;
 
-@Entity
-@Table
 public class Subject {
-    @Id
-    @Column(name = "stopid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long stopId;
     private String race;
     private Integer age;
@@ -64,9 +60,8 @@ public class Subject {
     @Override
     public String toString() {
         return  "stopId=" + stopId +
-                ", race='" + race + '\'' +
                 ", age=" + age +
-                ", sex='" + sex + '\'' +
-                ',';
+                ", race='" + race + '\'' +
+                ", sex='" + sex + '\'';
     }
 }

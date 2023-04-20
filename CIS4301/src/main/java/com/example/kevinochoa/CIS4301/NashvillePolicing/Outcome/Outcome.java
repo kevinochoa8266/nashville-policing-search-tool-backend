@@ -1,14 +1,8 @@
 package com.example.kevinochoa.CIS4301.NashvillePolicing.Outcome;
 
-import jakarta.persistence.*;
 
-@Entity
-@Table
 public class Outcome {
 
-    @Id
-    @Column(name = "stopid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stopId;
     private Boolean arrest;
     private Boolean citation;

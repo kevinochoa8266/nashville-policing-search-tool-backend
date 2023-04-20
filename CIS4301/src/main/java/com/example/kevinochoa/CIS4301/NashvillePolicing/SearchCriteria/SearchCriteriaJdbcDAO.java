@@ -24,24 +24,21 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
         setting.setStopDate(rs.getDate("stopDate"));
         setting.setStopTime(rs.getTime("stopTime"));
         setting.setAddress(rs.getString("address"));
+
         PoliceOfficer policeOfficer = new PoliceOfficer();
         policeOfficer.setOfficerId(rs.getString("officerid"));
         policeOfficer.setPrecinctId(rs.getInt("precinctid"));
         policeOfficer.setReportingArea(rs.getInt("reportingArea"));
         policeOfficer.setZoneCode(rs.getInt("zoneCode"));
         Subject subject = new Subject();
-        subject.setRace(rs.getString("race"));
+
         subject.setAge(rs.getInt("age"));
+        subject.setRace(rs.getString("race"));
         subject.setSex(rs.getString("sex"));
-//        Outcome outcome = new Outcome();
-//        outcome.setStopId(rs.getLong("stopid"));
-//        outcome.setArrest(rs.getBoolean("arrest"));
-//        outcome.setCitation(rs.getBoolean("citation"));
-//        outcome.setWarningIssued(rs.getBoolean("warningIssued"));
         SearchCriteria searchCriteria = new SearchCriteria();
-        searchCriteria.setSubject(subject);
         searchCriteria.setSetting(setting);
         searchCriteria.setPoliceOfficer(policeOfficer);
+        searchCriteria.setSubject(subject);
         return searchCriteria;
     };
 
@@ -52,8 +49,16 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
     @Override
     public List<SearchCriteria> list(Long id) {
         String sql = "SELECT se.*, p.*, s.* FROM setting se, policeOfficer p, subject s" +
-                     " WHERE s.stopid = se.stopid AND p.precinctid = se.precinctid " +
+                     "WHERE s.stopid = se.stopid AND p.stopid = se.stopid " +
                      "FETCH first 5 rows only";
+        jdbcTemplate.setFetchSize(15000);
+        return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    public List<SearchCriteria> getAllInstances(String whereClause) {
+        String sql = "SELECT se.*, p.*, s.* FROM setting se, policeOfficer p, subject s" +
+                "WHERE s.stopid = se.stopid AND p.stopid = se.stopid " +
+                "FETCH first 5 rows only";
         jdbcTemplate.setFetchSize(15000);
         return jdbcTemplate.query(sql, rowMapper);
     }

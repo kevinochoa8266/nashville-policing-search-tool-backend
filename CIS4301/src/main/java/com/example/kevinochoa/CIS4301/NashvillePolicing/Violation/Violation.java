@@ -1,14 +1,8 @@
 package com.example.kevinochoa.CIS4301.NashvillePolicing.Violation;
 
-import jakarta.persistence.*;
 
-@Entity
-@Table
 public class Violation {
 
-    @Id
-    @Column(name = "stopid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stopId;
     private String officerId;
     private String violationType;

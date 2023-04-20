@@ -4,6 +4,8 @@ import com.example.kevinochoa.CIS4301.NashvillePolicing.Outcome.Outcome;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.PoliceOfficer.PoliceOfficer;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.Setting.Setting;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.Subject.Subject;
+import com.example.kevinochoa.CIS4301.NashvillePolicing.SubjectSearch.SubjectSearch;
+import com.example.kevinochoa.CIS4301.NashvillePolicing.Violation.Violation;
 
 public class SearchCriteria {
 
@@ -11,15 +13,10 @@ public class SearchCriteria {
     private Outcome outcome;
     private Setting setting;
     private PoliceOfficer policeOfficer;
+    private Violation violation;
+    private SubjectSearch subjectSearch;
 
     public SearchCriteria() {
-    }
-
-    public SearchCriteria(Subject subject, Outcome outcome, Setting setting, PoliceOfficer policeOfficer) {
-        this.subject = subject;
-        this.outcome = outcome;
-        this.setting = setting;
-        this.policeOfficer = policeOfficer;
     }
 
     public Subject getSubject() {
@@ -54,6 +51,22 @@ public class SearchCriteria {
         this.policeOfficer = policeOfficer;
     }
 
+    public Violation getViolation() {
+        return violation;
+    }
+
+    public void setViolation(Violation violation) {
+        this.violation = violation;
+    }
+
+    public SubjectSearch getSubjectSearch() {
+        return subjectSearch;
+    }
+
+    public void setSubjectSearch(SubjectSearch subjectSearch) {
+        this.subjectSearch = subjectSearch;
+    }
+
     /*
     * 1. Date
     * 2. Time
@@ -71,6 +84,9 @@ public class SearchCriteria {
                 setting +
                 policeOfficer +
                 subject +
+                violation +
+                subjectSearch +
+                outcome +
                 '}';
     }
 }

@@ -1,14 +1,7 @@
 package com.example.kevinochoa.CIS4301.NashvillePolicing.PoliceOfficer;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table
 public class PoliceOfficer {
 
-    @Id
-    @Column(name = "officerid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String officerId;
     private Integer precinctId;
     private Integer reportingArea;
@@ -62,6 +55,6 @@ public class PoliceOfficer {
                 ", precinctId=" + precinctId +
                 ", reportingArea=" + reportingArea +
                 ", zoneCode=" + zoneCode +
-                '}';
+                ',';
     }
 }
