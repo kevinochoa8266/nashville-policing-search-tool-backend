@@ -1,7 +1,6 @@
 package com.example.kevinochoa.CIS4301.NashvillePolicing.SearchCriteria;
 
 import com.example.kevinochoa.CIS4301.Dao.DAO;
-import com.example.kevinochoa.CIS4301.NashvillePolicing.Outcome.Outcome;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.PoliceOfficer.PoliceOfficer;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.Setting.Setting;
 import com.example.kevinochoa.CIS4301.NashvillePolicing.Subject.Subject;
@@ -51,9 +50,10 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
     }
 
     @Override
-    public List<SearchCriteria> list() {
+    public List<SearchCriteria> list(Long id) {
         String sql = "SELECT se.*, p.*, s.* FROM setting se, policeOfficer p, subject s" +
-                     " WHERE s.stopid = o.stopid AND s.stopid = se.stopid AND s.age = 40";
+                     " WHERE s.stopid = se.stopid AND p.precinctid = se.precinctid " +
+                     "FETCH first 5 rows only";
         jdbcTemplate.setFetchSize(15000);
         return jdbcTemplate.query(sql, rowMapper);
     }

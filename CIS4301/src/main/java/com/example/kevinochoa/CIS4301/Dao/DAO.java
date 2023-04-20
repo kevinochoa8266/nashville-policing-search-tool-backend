@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface DAO<T> {
 
-    List<T> list();
+    List<T> list(Long id);
 
     void create(T t);
 

@@ -13,6 +13,7 @@ public class Setting {
     @Column(name = "stopid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stopId;
+    private Integer precinctId;
     private Date stopDate;
     private Time stopTime;
     private String address;
@@ -22,8 +23,9 @@ public class Setting {
     public Setting() {
     }
 
-    public Setting(Long stopId, Date stopDate, Time stopTime, String address, Integer longitude, Integer latitude) {
+    public Setting(Long stopId, Integer precinctId, Date stopDate, Time stopTime, String address, Integer longitude, Integer latitude) {
         this.stopId = stopId;
+        this.precinctId = precinctId;
         this.stopDate = stopDate;
         this.stopTime = stopTime;
         this.address = address;
@@ -79,9 +81,20 @@ public class Setting {
         this.latitude = latitude;
     }
 
+    public Integer getPrecinctId() {
+        return precinctId;
+    }
+
+    public void setPrecinctId(Integer precinctId) {
+        this.precinctId = precinctId;
+    }
+
     @Override
     public String toString() {
-        return  ", stopDate=" + stopDate +
+        return "Setting{" +
+                "stopId=" + stopId +
+                ", precinctId=" + precinctId +
+                ", stopDate=" + stopDate +
                 ", stopTime=" + stopTime +
                 ", address='" + address + '\'' +
                 ", longitude=" + longitude +

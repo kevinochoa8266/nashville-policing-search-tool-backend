@@ -30,10 +30,23 @@ public class SubjectJdbcDAO implements DAO<Subject> {
     }
 
     @Override
-    public List<Subject> list() {
-        String sql = "SELECT * FROM subject";
+    public List<Subject> list(Long id) {
+        String sql = "SELECT * FROM subject WHERE stopid = ?";
         jdbcTemplate.setFetchSize(15000);
-        return jdbcTemplate.query(sql, rowMapper);
+        return jdbcTemplate.query(sql, rowMapper, id);
+    }
+
+    public int getTupleCount() {
+        String sql = "SELECT COUNT (*) FROM subject";
+        int tuplesCount;
+        try {
+            tuplesCount =  jdbcTemplate.queryForObject(sql, Integer.class);
+            return tuplesCount;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
