@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/Subjects")
+@RequestMapping(path = "api/v1/SearchCriteria")
 public class SearchCriteriaController {
 
     @Autowired

@@ -113,17 +113,14 @@ public class SubjectSearch {
 
         @Override
         public String toString() {
-                return "SubjectSearch{" +
-                        "stopId=" + stopId +
-                        ", officerId='" + officerId + '\'' +
+                return  ", searchConducted=" + searchConducted +
                         ", searchBasis='" + searchBasis + '\'' +
                         ", friskPerformed=" + friskPerformed +
                         ", searchVehicle=" + searchVehicle +
                         ", searchPerson=" + searchPerson +
-                        ", searchConducted=" + searchConducted +
                         ", weaponsFound=" + weaponsFound +
                         ", drugsFound=" + drugsFound +
                         ", contrabandFound=" + contrabandFound +
-                        '}';
+                        ',';
         }
 }

@@ -52,11 +52,8 @@ public class Violation {
 
     @Override
     public String toString() {
-        return "Violation{" +
-                "stopId=" + stopId +
-                ", officerId='" + officerId + '\'' +
+        return  ", reason='" + reason + '\'' +
                 ", violationType='" + violationType + '\'' +
-                ", reason='" + reason + '\'' +
-                '}';
+                ',';
     }
 }

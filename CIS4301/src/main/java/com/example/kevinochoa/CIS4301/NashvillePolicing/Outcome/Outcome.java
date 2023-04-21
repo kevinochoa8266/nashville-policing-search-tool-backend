@@ -52,8 +52,8 @@ public class Outcome {
 
     @Override
     public String toString() {
-        return  "arrest=" + arrest +
-                ", citation=" + citation +
-                ", warningIssued=" + warningIssued;
+        return  ", citation=" + citation +
+                ", warningIssued=" + warningIssued +
+                ", arrest=" + arrest;
     }
 }
