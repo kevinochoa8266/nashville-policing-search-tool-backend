@@ -25,7 +25,7 @@ public class SearchCriteriaService {
 //        }
         if (searchCriteria.getPoliceOfficer().getOfficerId() != null
                 || !Objects.equals(searchCriteria.getPoliceOfficer().getOfficerId(), "")) {
-            stringBuilder.append("po.officerid = '");
+            stringBuilder.append(" AND po.officerid = '");
             stringBuilder.append(searchCriteria.getPoliceOfficer().getOfficerId());
             stringBuilder.append("' ");
         }

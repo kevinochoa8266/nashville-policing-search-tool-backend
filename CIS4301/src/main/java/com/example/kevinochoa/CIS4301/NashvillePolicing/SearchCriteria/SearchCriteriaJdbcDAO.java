@@ -24,43 +24,46 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
 
     RowMapper<SearchCriteria> rowMapper = (rs, rowNum) -> {
         Setting setting = new Setting();
+        setting.setStopId(rs.getLong("stopId"));
         setting.setStopDate(rs.getDate("stopDate"));
         setting.setStopTime(rs.getTime("stopTime"));
         setting.setAddress(rs.getString("address"));
 
         PoliceOfficer policeOfficer = new PoliceOfficer();
-        policeOfficer.setOfficerId(rs.getString("officerid"));
-        policeOfficer.setPrecinctId(rs.getInt("precinctid"));
+        policeOfficer.setStopId(rs.getLong("stopId"));
+        policeOfficer.setOfficerId(rs.getString("officerId"));
+        policeOfficer.setPrecinctId(rs.getInt("precinctId"));
         policeOfficer.setReportingArea(rs.getInt("reportingArea"));
         policeOfficer.setZoneCode(rs.getInt("zoneCode"));
 
         Subject subject = new Subject();
+        subject.setStopId(rs.getLong("stopId"));
         subject.setAge(rs.getInt("age"));
         subject.setRace(rs.getString("race"));
         subject.setSex(rs.getString("sex"));
 
         Violation violation = new Violation();
-        violation.setStopId(rs.getLong("stopid"));
-        violation.setOfficerId(rs.getString("officerid"));
-        violation.setViolationType(rs.getString("violationtype"));
+        violation.setStopId(rs.getLong("stopId"));
+        //violation.setOfficerId(rs.getString("officerId"));
+        violation.setViolationType(rs.getString("violationType"));
         violation.setReason(rs.getString("reason"));
 
         SubjectSearch subjectSearch = new SubjectSearch();
-        subjectSearch.setOfficerId(rs.getString("officerid"));
-        subjectSearch.setSearchConducted(rs.getBoolean("searchconducted"));
-        subjectSearch.setSearchBasis(rs.getString("searchbasis"));
-        subjectSearch.setFriskPerformed(rs.getBoolean("friskperformed"));
-        subjectSearch.setSearchVehicle(rs.getBoolean("searchvehicle"));
-        subjectSearch.setSearchPerson(rs.getBoolean("searchperson"));
-        subjectSearch.setStopId(rs.getLong("stopid"));
-        subjectSearch.setWeaponsFound(rs.getBoolean("weapons"));
-        subjectSearch.setDrugsFound(rs.getBoolean("drugsfound"));
-        subjectSearch.setContrabandFound(rs.getBoolean("contrabandfound"));
+        subjectSearch.setOfficerId(rs.getString("officerId"));
+        subjectSearch.setSearchConducted(rs.getBoolean("searchConducted"));
+        subjectSearch.setSearchBasis(rs.getString("searchBasis"));
+        subjectSearch.setFriskPerformed(rs.getBoolean("friskPerformed"));
+        subjectSearch.setSearchVehicle(rs.getBoolean("searchVehicle"));
+        subjectSearch.setSearchPerson(rs.getBoolean("searchPerson"));
+        subjectSearch.setStopId(rs.getLong("stopId"));
+        subjectSearch.setWeaponsFound(rs.getBoolean("weaponsFound"));
+        subjectSearch.setDrugsFound(rs.getBoolean("drugsFound"));
+        subjectSearch.setContrabandFound(rs.getBoolean("contrabandFound"));
 
         Outcome outcome = new Outcome();
-        outcome.setStopId(rs.getLong("stopid"));
+        outcome.setStopId(rs.getLong("stopId"));
         outcome.setCitation(rs.getBoolean("citation"));
-        outcome.setWarningIssued(rs.getBoolean("warningissued"));
+        outcome.setWarningIssued(rs.getBoolean("warningIssued"));
         outcome.setArrest(rs.getBoolean("arrest"));
 
         SearchCriteria searchCriteria = new SearchCriteria();
@@ -73,17 +76,13 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
         return searchCriteria;
     };
 
+
     public SearchCriteriaJdbcDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public List<SearchCriteria> list(Long id) {
-        return null;
-    }
-
     public List<SearchCriteria> getAllInstances(String whereClause) {
-        String sql = """
+        String selectFrom = """
                 SELECT se.stopId, se.stopDate, se.stopTime, se.address, po.officerId,
                 po.precinctId, po.reportingArea, po.zoneCode, su.age, su.race, su.sex, v.reason,
                 v.violationType, sus.searchConducted, sus.searchBasis, sus.friskPerformed,
@@ -91,11 +90,16 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
                 sus.contrabandFound, o.citation, o.warningIssued, o.arrest FROM setting se,
                 policeOfficer po, subject su, subjectSearch sus, violation v, outcome o WHERE
                 se.stopId = po.stopId AND po.stopId = su.stopId AND su.stopId = sus.stopId AND
-                sus.stopId = v.stopId AND v.stopId = o.stopId AND po.officerId = 'a983204b21'
-                AND po.reportingArea = '9035';
+                sus.stopId = v.stopId AND v.stopId = o.stopId
                 """;
+        String searchQuery = selectFrom + whereClause;
         jdbcTemplate.setFetchSize(15000);
-        return jdbcTemplate.query(sql, rowMapper);
+        return jdbcTemplate.query(searchQuery, rowMapper);
+    }
+
+    @Override
+    public List<SearchCriteria> list(Long id) {
+        return null;
     }
 
     @Override

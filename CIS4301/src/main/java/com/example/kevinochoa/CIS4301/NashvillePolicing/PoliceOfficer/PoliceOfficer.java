@@ -2,6 +2,7 @@ package com.example.kevinochoa.CIS4301.NashvillePolicing.PoliceOfficer;
 
 public class PoliceOfficer {
 
+    private Long stopId;
     private String officerId;
     private Integer precinctId;
     private Integer reportingArea;
@@ -10,11 +11,12 @@ public class PoliceOfficer {
     public PoliceOfficer() {
     }
 
-    public PoliceOfficer(String officerId, Integer precinctId, Integer reportingArea, Integer zoneCode) {
+    public PoliceOfficer(Long stopId,String officerId, Integer precinctId, Integer reportingArea, Integer zoneCode) {
         this.officerId = officerId;
         this.precinctId = precinctId;
         this.reportingArea = reportingArea;
         this.zoneCode = zoneCode;
+        this.stopId = stopId;
     }
 
     public String getOfficerId() {
@@ -47,6 +49,14 @@ public class PoliceOfficer {
 
     public void setZoneCode(Integer zoneCode) {
         this.zoneCode = zoneCode;
+    }
+
+    public Long getStopId() {
+        return stopId;
+    }
+
+    public void setStopId(Long stopId) {
+        this.stopId = stopId;
     }
 
     @Override

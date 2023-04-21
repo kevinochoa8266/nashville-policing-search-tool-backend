@@ -25,6 +25,7 @@ public class SearchCriteriaController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Couldn't retrieve the number of tuples in the database");
     }*/
 
+    @CrossOrigin(origins = "http://localhost:3001")
     @PostMapping("/find")
     public ResponseEntity<?> findCase(@RequestBody SearchCriteria searchCriteria) {
         List<SearchCriteria> searchCriteriaList = searchCriteriaService.getCases(searchCriteria);
