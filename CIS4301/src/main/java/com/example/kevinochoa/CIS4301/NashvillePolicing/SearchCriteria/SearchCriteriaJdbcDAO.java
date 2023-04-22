@@ -92,7 +92,7 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
                 se.stopId = po.stopId AND po.stopId = su.stopId AND su.stopId = sus.stopId AND
                 sus.stopId = v.stopId AND v.stopId = o.stopId
                 """;
-        String searchQuery = selectFrom + whereClause;
+        String searchQuery = selectFrom + whereClause + " FETCH FIRST 10 ROWS ONLY";
         jdbcTemplate.setFetchSize(15000);
         return jdbcTemplate.query(searchQuery, rowMapper);
     }
