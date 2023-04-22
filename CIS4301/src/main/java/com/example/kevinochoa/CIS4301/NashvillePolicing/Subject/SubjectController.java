@@ -15,6 +15,7 @@ public class SubjectController {
     @Autowired
     private SubjectService subjectService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/totalTuples")
     public ResponseEntity<?> getTotalTuples() {
         int totalCount = subjectService.getTotalSubjects();
