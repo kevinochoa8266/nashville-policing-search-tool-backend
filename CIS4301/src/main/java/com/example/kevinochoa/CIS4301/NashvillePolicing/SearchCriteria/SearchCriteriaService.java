@@ -17,12 +17,16 @@ public class SearchCriteriaService {
     public List<SearchCriteria> getCases(SearchCriteria searchCriteria) {
         // construct the WHERE clause for the SQL statement.
         StringBuilder stringBuilder = new StringBuilder();
-//        if (searchCriteria.getSetting().getStopDate() != null) {
-//            stringBuilder.append("AND se.stopdate = '");
-//            stringBuilder.append(searchCriteria.getSetting().getStopDate().toString());
-//            stringBuilder.append("'");
-//        }
-        // stop time NOT IMPLEMENTED YET
+        if (searchCriteria.getSetting().getStopDate() != null) {
+            stringBuilder.append("AND se.stopDate = '");
+            stringBuilder.append(searchCriteria.getSetting().getStopDate());
+            stringBuilder.append("'");
+        }
+        if (searchCriteria.getSetting().getStopTime() != null) {
+            stringBuilder.append("AND se.stopTime = '");
+            stringBuilder.append(searchCriteria.getSetting().getStopTime());
+            stringBuilder.append("'");
+        }
 
         if (searchCriteria.getSetting().getAddress() != null) {
             stringBuilder.append(" AND se.address = '");

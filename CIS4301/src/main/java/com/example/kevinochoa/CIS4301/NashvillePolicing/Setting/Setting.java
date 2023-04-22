@@ -1,14 +1,13 @@
 package com.example.kevinochoa.CIS4301.NashvillePolicing.Setting;
 
-
 import java.sql.Time;
 import java.util.Date;
 
 public class Setting {
 
     private Long stopId;
-    private Date stopDate;
-    private Time stopTime;
+    private String stopDate;
+    private String stopTime;
     private String address;
     private Integer longitude;
     private Integer latitude;
@@ -16,7 +15,7 @@ public class Setting {
     public Setting() {
     }
 
-    public Setting(Long stopId, Date stopDate, Time stopTime, String address, Integer longitude, Integer latitude) {
+    public Setting(Long stopId, String stopDate, String stopTime, String address, Integer longitude, Integer latitude) {
         this.stopId = stopId;
         this.stopDate = stopDate;
         this.stopTime = stopTime;
@@ -33,19 +32,19 @@ public class Setting {
         this.stopId = stopId;
     }
 
-    public Date getStopDate() {
+    public String getStopDate() {
         return stopDate;
     }
 
-    public void setStopDate(Date stopDate) {
+    public void setStopDate(String stopDate) {
         this.stopDate = stopDate;
     }
 
-    public Time getStopTime() {
+    public String getStopTime() {
         return stopTime;
     }
 
-    public void setStopTime(Time stopTime) {
+    public void setStopTime(String stopTime) {
         this.stopTime = stopTime;
     }
 

@@ -25,8 +25,8 @@ public class SearchCriteriaJdbcDAO implements DAO<SearchCriteria> {
     RowMapper<SearchCriteria> rowMapper = (rs, rowNum) -> {
         Setting setting = new Setting();
         setting.setStopId(rs.getLong("stopId"));
-        setting.setStopDate(rs.getDate("stopDate"));
-        setting.setStopTime(rs.getTime("stopTime"));
+        setting.setStopDate(rs.getString("stopDate"));
+        setting.setStopTime(rs.getString("stopTime"));
         setting.setAddress(rs.getString("address"));
 
         PoliceOfficer policeOfficer = new PoliceOfficer();
