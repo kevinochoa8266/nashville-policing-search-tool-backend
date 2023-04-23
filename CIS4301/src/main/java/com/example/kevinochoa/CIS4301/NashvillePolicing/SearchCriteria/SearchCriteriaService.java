@@ -3,7 +3,6 @@ package com.example.kevinochoa.CIS4301.NashvillePolicing.SearchCriteria;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class SearchCriteriaService {
@@ -54,7 +53,6 @@ public class SearchCriteriaService {
             stringBuilder.append("' ");
         }
 
-        //subject information
         if (searchCriteria.getSubject().getAge() != null){
             stringBuilder.append(" AND su.age = '");
             stringBuilder.append(searchCriteria.getSubject().getAge());
