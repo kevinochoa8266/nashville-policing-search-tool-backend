@@ -18,9 +18,9 @@ public class SearchCriteriaService {
         // construct the WHERE clause for the SQL statement.
         StringBuilder stringBuilder = new StringBuilder();
         if (searchCriteria.getSetting().getStopDate() != null) {
-            stringBuilder.append("AND se.stopDate = '");
+            stringBuilder.append("AND se.stopDate = to_date('");
             stringBuilder.append(searchCriteria.getSetting().getStopDate());
-            stringBuilder.append("'");
+            stringBuilder.append("', 'MM/DD/YYYY')");
         }
         if (searchCriteria.getSetting().getStopTime() != null) {
             stringBuilder.append("AND se.stopTime = '");
